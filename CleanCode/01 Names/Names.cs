@@ -1,17 +1,17 @@
 ﻿using System.Drawing;
 
-namespace CleanCode.Names
+namespace CleanCode.GraphicEditor
 {
-    public class Names
+    public class ImageTypeEditor
     {
-        public Bitmap Method1(string n)
+        public Bitmap BitmapDrawer(string filename)
         {
-            var b = new Bitmap(n);
-            var g = Graphics.FromImage(b);
-            g.DrawString("a", SystemFonts.DefaultFont, SystemBrushes.Desktop, new PointF(0, 0));
-            g.DrawString("b", SystemFonts.DefaultFont, SystemBrushes.Desktop, new PointF(0, 20));
-            g.DrawString("c", SystemFonts.DefaultFont, SystemBrushes.Desktop, new PointF(0, 30));
-            return b;
+            var bitmap = new Bitmap(filename);
+            var graphic = Graphics.FromImage(bitmap);
+            graphic.DrawString("a", SystemFonts.DefaultFont, SystemBrushes.Desktop, new PointF(0, 0));
+            graphic.DrawString("b", SystemFonts.DefaultFont, SystemBrushes.Desktop, new PointF(0, 20));
+            graphic.DrawString("c", SystemFonts.DefaultFont, SystemBrushes.Desktop, new PointF(0, 30));
+            return bitmap;
         }
     }
 }
