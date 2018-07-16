@@ -5,39 +5,44 @@ namespace CleanCode.PoorMethodSignatures
 {
     public class PoorMethodSignatures
     {
-        public void Run()
+        public void ExecuteLoginUser()
         {
-            var userService = new UserService();
+            var UserAuthentication = new AuthenticationClient();
 
-            var user = userService.GetUser("username", "password", true);
-            var anotherUser = userService.GetUser("username", null, false);
+            string validUser = "username";
+            string validpassword = "password";
+            string invalidpassword = null;
+            bool statuslogged = true;
+            bool statusnotlogged = false;
+            var ValidLoginUser = UserAuthentication.GetAuthenticationUser(validUser, validpassword, statuslogged);
+            var InvalidLoginUser = UserAuthentication.GetAuthenticationUser(validUser, invalidpassword, statusnotlogged);
         }
     }
 
-    public class UserService
+    public class AuthenticationClient
     {
-        private UserDbContext _dbContext = new UserDbContext();
+        private UserDatabaseClient DatabaseConexion = new UserDatabaseClient();
 
-        public User GetUser(string username, string password, bool login)
+        public User GetAuthenticationUser(string username, string password, bool login)
         {
-            return login ? Metodo1(username, password) : Metodo2(username);
+            return login ? LogUser(username, password) : ReturnInvalidUser(username);
         }
 
-        private User Metodo2(string username)
+        private User ReturnInvalidUser(string username)
         {
-            return _dbContext.Users.SingleOrDefault(u => u.Username == username);
+            return DatabaseConexion.Users.SingleOrDefault(u => u.Username == username);
         }
 
-        private User Metodo1(string username, string password)
+        private User LogUser(string username, string password)
         {
-            var user = _dbContext.Users.SingleOrDefault(u => u.Username == username && u.Password == password);
+            var user = DatabaseConexion.Users.SingleOrDefault(u => u.Username == username && u.Password == password);
             if (user != null)
                 user.LastLogin = DateTime.Now;
             return user;
         }
     }
 
-    public class UserDbContext : DbContext
+    public class UserDatabaseClient : DbContext
     {
         public IQueryable<User> Users { get; set; }
     }
