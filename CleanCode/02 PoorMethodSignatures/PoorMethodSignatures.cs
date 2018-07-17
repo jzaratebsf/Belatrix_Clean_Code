@@ -12,10 +12,9 @@ namespace CleanCode.PoorMethodSignatures
             string validUser = "username";
             string validpassword = "password";
             string invalidpassword = null;
-            bool statuslogged = true;
-            bool statusnotlogged = false;
-            var ValidLoginUser = UserAuthentication.GetAuthenticationUser(validUser, validpassword, statuslogged);
-            var InvalidLoginUser = UserAuthentication.GetAuthenticationUser(validUser, invalidpassword, statusnotlogged);
+            
+            var ValidLoginUser = UserAuthentication.GetAuthenticationUser(validUser, validpassword);
+            var InvalidLoginUser = UserAuthentication.GetAuthenticationUser(validUser, invalidpassword);
         }
     }
 
@@ -23,7 +22,7 @@ namespace CleanCode.PoorMethodSignatures
     {
         private UserDatabaseClient DatabaseConexion = new UserDatabaseClient();
 
-        public User GetAuthenticationUser(string username, string password, bool login)
+        public User GetAuthenticationUser(string username, string password)
         {
             return login ? LogUser(username, password) : ReturnInvalidUser(username);
         }
