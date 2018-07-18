@@ -14,13 +14,9 @@ namespace CleanCode.VariableDeclarationsAtTheTop
         {
             decimal overtimeHours = 0;
             decimal regularHours = 0;
-            decimal regularPay = 0;
-            decimal overtimePay = 0;
-
-            decimal grossPay = 0;
-
             if (_payFrequency == PayFrequency.Fortnightly)
             {
+                
                 if (hours > 80)
                 {
                     overtimeHours = hours - 80;
@@ -29,10 +25,9 @@ namespace CleanCode.VariableDeclarationsAtTheTop
                 else
                     regularHours = hours;
             }
-
-
             else if (_payFrequency == PayFrequency.Weekly)
             {
+                
                 if (hours > 40)
                 {
                     overtimeHours = hours - 40;
@@ -43,11 +38,16 @@ namespace CleanCode.VariableDeclarationsAtTheTop
             }
 
 
+
+            decimal overtimePay = 0;
             if (overtimeHours > 0m)
             {
+                
                 overtimePay += (rate * 1.5m) * overtimeHours;
             }
 
+            decimal regularPay = 0;            
+            decimal grossPay = 0;
             regularPay = (regularHours * rate);
             grossPay = regularPay + overtimePay;
 
