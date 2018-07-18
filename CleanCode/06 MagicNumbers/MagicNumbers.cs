@@ -3,29 +3,40 @@ namespace CleanCode.MagicNumbers
 {
     public class MagicNumbers
     {
-        public void ApproveDocument(int status)
+        enum Status { Approve = 1, Denied = 2 };
+        public void ApproveDocument()
         {
-            if (status == 1)
+
+            if ((int)Status.Approve == 1)
             {
                 // ...
             }
-            else if (status == 2)
+            else
+            if ((int)Status.Denied == 2)
             {
                 // ...
             }
         }
 
-        public void RejectDoument(string status)
+     
+        public void RejectDoument(RejectedState Status)
         {
-            switch (status)
+            switch (Status)
             {
-                case "1":
+                case Status.RejectedOK:
                     // ...
                     break;
-                case "2":
+                case Status.Rejectedfail:
                     // ...
                     break;
             }
         }
+
+        public class RejectedState
+        {
+            public string RejectedOK { get; set; }
+            public string Rejectedfail { get; set; }
+        }
     }
+}
 }
