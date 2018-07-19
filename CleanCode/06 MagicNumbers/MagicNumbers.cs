@@ -1,4 +1,6 @@
 ﻿
+using System.Text;
+
 namespace CleanCode.MagicNumbers
 {
     public class MagicNumbers
@@ -11,24 +13,9 @@ namespace CleanCode.MagicNumbers
             {
                 // ...
             }
-            else
             if ((int)Status.Denied == 2)
             {
                 // ...
-            }
-        }
-
-     
-        public void RejectDoument(RejectedState Status)
-        {
-            switch (Status)
-            {
-                case Status.RejectedOK:
-                    // ...
-                    break;
-                case Status.Rejectedfail:
-                    // ...
-                    break;
             }
         }
 
@@ -37,6 +24,23 @@ namespace CleanCode.MagicNumbers
             public string RejectedOK { get; set; }
             public string Rejectedfail { get; set; }
         }
+
+        StringBuilder estado = new StringBuilder("1", "2");
+
+        public void RejectDoument(StringBuilder estado)
+        {
+            switch (estado)
+            {
+                case "1":  
+                    // ...
+                    break;
+                case "2":
+                    // ...
+                    break;
+            }
+        }
+
+        
     }
 }
-}
+
