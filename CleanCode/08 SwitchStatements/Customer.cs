@@ -12,3 +12,8 @@ namespace CleanCode.SwitchStatements
         Unlimited
     }
 }
+
+
+// APPLY STRATEGY PATTENR
+// JUGAR OPEN CLOSED y LISKOV SUBSTITUTION
+

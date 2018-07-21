@@ -8,7 +8,7 @@ namespace CleanCode.SwitchStatements
         public float SmsCost { get; set; }
         public float TotalCost { get; set; }
 
-        public void Generate(MonthlyUsage usage)
+        public void GenerateTotalCost(MonthlyUsage usage)
         {
             switch (usage.Customer.Type)
             {
