@@ -1,14 +1,32 @@
 ﻿
 namespace CleanCode.SwitchStatements
 {
+    //public class Customer
+    //{
+    //    public CustomerType BillType { get; set; }
+    //}
+
+    //public enum CustomerType
+    //{
+    //    PayAsYouGo = 1,
+    //    Unlimited
+    //}
+
+
     public class Customer
     {
-        public CustomerType Type { get; set; }
+        public int CustomerId { get; set; }
     }
 
-    public enum CustomerType
+
+    public class CustomerPaysAsYouGo : Customer
     {
-        PayAsYouGo = 1,
-        Unlimited
+        
     }
+
+    public class CustomerUnlimited : Customer
+    {
+        
+    }
+
 }
