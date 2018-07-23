@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace CleanCode.FullRefactoring
+namespace Project.UserControls
 {
     public class PostRepository
     {

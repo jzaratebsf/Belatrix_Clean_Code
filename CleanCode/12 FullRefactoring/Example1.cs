@@ -9,65 +9,95 @@ namespace Project.UserControls
 {
     public class PostControl : System.Web.UI.UserControl
     {
-        private PostDbContext DBContext;
+        
+        private readonly PostValidator _validator;
+        private readonly PostRepository _postRepository;
+        private ValidationResult results;
+        private BulletedList errorSummary;
 
+        public PostControl()
+        {
+            _validator = new PostValidator();
+            _postRepository = new PostRepository();
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            DBContext = new PostDbContext();
-
             if (Page.IsPostBack)
             {
-                PostValidator validator = new PostValidator();
-                Post entity = new Post()
-                {
-                    // Map form fields to entity properties
-                    Id = Convert.ToInt32(PostId.Value),
-                    Title = PostTitle.Text.Trim(),
-                    Body = PostBody.Text.Trim()
-                };
-                ValidationResult results = validator.Validate(entity);
-
-                if (results.IsValid)
-                {
-                    // Save to the database and continue to the next page
-                    DBContext.Posts.Add(entity);
-                    DBContext.SaveChanges();
-                }
-                else
-                {
-                    BulletedList summary = (BulletedList)FindControl("ErrorSummary");
-
-                    // Display errors to the user
-                    foreach (var failure in results.Errors)
-                    {
-                        Label errorMessage = FindControl(failure.PropertyName + "Error") as Label;
-
-                        if (errorMessage == null)
-                        {
-                            summary.Items.Add(new ListItem(failure.ErrorMessage));
-                        }
-                        else
-                        {
-                            errorMessage.Text = failure.ErrorMessage;
-                        }
-                    }
-                }
+                EvaluatePost();
             }
             else
             {
-                // Display form
-                Post entity = DBContext.Posts.SingleOrDefault(p => p.Id == Convert.ToInt32(Request.QueryString["id"]));
-                PostBody.Text = entity.Body;
-                PostTitle.Text = entity.Title;
-
+                DisplayForm();
             }
         }
 
+        private void EvaluatePost()
+        {
+            Post postentity = GetPost();
+            results = _validator.Validate(postentity);
+
+            if (results.IsValid)
+            {
+                _postRepository.SavePost(postentity);
+            }
+            else
+            {
+                DisplayErrors();
+            }
+        }
+
+        private Post GetPost()
+        {
+            var postentity = new Post()
+            {
+                // Map form fields to entity properties
+                Id = Convert.ToInt32(PostId.Value),
+                Title = PostTitle.Text.Trim(),
+                Body = PostBody.Text.Trim()
+            };
+            return postentity;
+        }
+
+        private void ValidatePost()
+        {
+            
+                       
+        }
+
+        private void DisplayErrors()
+        {
+            errorSummary = (BulletedList)FindControl("ErrorSummary");
+
+            // Display errors to the user
+            foreach (var failure in results.Errors)
+            {
+                Label errorMessage = FindControl(failure.PropertyName + "Error") as Label;
+
+                if (errorMessage == null)
+                {
+                    errorSummary.Items.Add(new ListItem(failure.ErrorMessage));
+                }
+                else
+                {
+                    errorMessage.Text = failure.ErrorMessage;
+                }
+            }
+        }
+
+        private void DisplayForm()
+        {
+            // Display form
+            Post postentity = _postRepository.GetPost(Convert.ToInt32(Request.QueryString["id"]));
+            PostBody.Text = postentity.Body;
+            PostTitle.Text = postentity.Title;
+        }
+              
+        
+
         public Label PostBody { get; set; }
-
         public Label PostTitle { get; set; }
-
         public int? PostId { get; set; }
     }
 
