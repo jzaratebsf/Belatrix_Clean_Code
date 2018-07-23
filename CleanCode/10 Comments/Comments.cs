@@ -6,20 +6,21 @@ namespace CleanCode.Comments
 {
     public class Comments
     {
-        private int _pf;  // pay frequency
-        private DbContext _dbContext;
+        private int _pf;  // rename variable to pay frequency
+        private DbContext _dbContext;   //Database Conexion
 
         public Comments()
         {
-            _dbContext = new DbContext();
+            _dbContext = new DbContext();   //Initialize Database Conexion
         }
 
         // Returns list of customers in a country.
         public List<Customer> GetCustomers(int countryCode)
         {
-            //TODO: We need to get rid of abcd once we revisit this method. Currently, it's 
-            // creating a coupling betwen x and y and because of that we're not able to do 
-            // xyz. 
+            //TODO: 
+            //GetCustomers method Implementation
+            //Specify variable countryCode
+            //Implement a message for NotImplementedException
 
             throw new NotImplementedException();
         }
@@ -27,11 +28,13 @@ namespace CleanCode.Comments
         public void SubmitOrder(Order order)
         {
             // Save order to the database
+            // TODO: Create a method and abstract it in another function outside SubmitOrder
             _dbContext.Orders.Add(order);
             _dbContext.SaveChanges();
 
             // Send an email to the customer
-            var client = new SmtpClient();
+            // TODO: Create a method and abstract it in another function outside SubmitOrder
+            var client = new SmtpClient();          
             var message = new MailMessage("noreply@site.com", order.Customer.Email, "Your order was successfully placed.", ".");
             client.Send(message);
 
@@ -44,7 +47,7 @@ namespace CleanCode.Comments
 
         public void SaveChanges()
         {
-
+            // TODO: Implement this method
 
         }
     }
@@ -53,7 +56,7 @@ namespace CleanCode.Comments
     {
         public void Add(Order order)
         {
-
+            // TODO: Implement this method
 
         }
     }

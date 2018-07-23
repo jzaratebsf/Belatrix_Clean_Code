@@ -5,39 +5,25 @@ namespace CleanCode.DuplicatedCode
 {
     class DuplicatedCode
     {
-        public void AdmitGuest(string name, string admissionDateTime)
+
+        internal class GuestAdmissionTime
         {
-            // Some logic 
-            // ...
-
-            int time;
-            int hours = 0;
-            int minutes = 0;
-            if (!string.IsNullOrWhiteSpace(admissionDateTime))
-            {
-                if (int.TryParse(admissionDateTime.Replace(":", ""), out time))
-                {
-                    hours = time / 100;
-                    minutes = time % 100;
-                }
-                else
-                {
-                    throw new ArgumentException("admissionDateTime");
-                }
-
-            }
-            else
-                throw new ArgumentNullException("admissionDateTime");
-
-            // Some more logic 
-            // ...
-            if (hours < 10)
-            {
-
-            }
+            public string name  {get; set; }
+            public string admissionDateTime { get; set; }
         }
 
-        public void UpdateAdmission(int admissionId, string name, string admissionDateTime)
+        
+        public void AdmitGuest(GuestAdmissionTime guestime)
+        {
+            GetAddmissionTime(guestime);
+        }
+
+        public void UpdateAdmission(int admissionId, GuestAdmissionTime guestime)
+        {
+            GetAddmissionTime(guestime);
+        }
+
+        private void GetAddmissionTime(GuestAdmissionTime Time)
         {
             // Some logic 
             // ...
@@ -45,9 +31,9 @@ namespace CleanCode.DuplicatedCode
             int time;
             int hours = 0;
             int minutes = 0;
-            if (!string.IsNullOrWhiteSpace(admissionDateTime))
+            if (!string.IsNullOrWhiteSpace(Time.admissionDateTime))
             {
-                if (int.TryParse(admissionDateTime.Replace(":", ""), out time))
+                if (int.TryParse(Time.admissionDateTime.Replace(":", ""), out time))
                 {
                     hours = time / 100;
                     minutes = time % 100;
@@ -56,6 +42,7 @@ namespace CleanCode.DuplicatedCode
                 {
                     throw new ArgumentException("admissionDateTime");
                 }
+
             }
             else
                 throw new ArgumentNullException("admissionDateTime");
