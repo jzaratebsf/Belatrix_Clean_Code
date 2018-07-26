@@ -26,11 +26,7 @@ namespace SOLID._03_Liskov_substitution
 
     public class PermanentEmployee : Employee
     {
-        public PermanentEmployee()
-        { }
-
-        public PermanentEmployee(int id, string name) : base(id, name)
-        { }
+        
         public override decimal CalculateBonus(decimal salary)
         {
             return salary * .1M;
@@ -39,11 +35,6 @@ namespace SOLID._03_Liskov_substitution
 
     public class TemporaryEmployee : Employee
     {
-        public TemporaryEmployee()
-        { }
-
-        public TemporaryEmployee(int id, string name) : base(id, name)
-        { }
         public override decimal CalculateBonus(decimal salary)
         {
             return salary * .05M;
@@ -52,11 +43,6 @@ namespace SOLID._03_Liskov_substitution
 
     public class ContractEmployee : Employee
     {
-        public ContractEmployee()
-        { }
-
-        public ContractEmployee(int id, string name) : base(id, name)
-        { }
         public override decimal CalculateBonus(decimal salary)
         {
             throw new NotImplementedException();
