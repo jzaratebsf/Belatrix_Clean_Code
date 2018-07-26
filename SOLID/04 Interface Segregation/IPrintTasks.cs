@@ -4,8 +4,8 @@ namespace SOLID._04_Interface_Segregation
 {
     public interface IPrintTasks
     {
-        bool PrintContent(string content);
-        bool PhotoCopyContent(string content);        
+        bool PrintDuplexContent(string content);
+        bool FaxContent(string content);
     }
 
     public class IPrintask02
