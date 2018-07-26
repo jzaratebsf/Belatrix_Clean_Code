@@ -10,7 +10,7 @@ namespace SOLID._02_OpenClosed
                 
     }    
 
-    public class newEmployee : Employee
+    public class NewEmployee : Employee
     {
         private Employee worker = new Employee();
 
